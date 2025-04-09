@@ -1,5 +1,3 @@
-//# Ruttala-lava-raju.github.io
-
 # 📘 Okta IDX Authentication Integration
 
 ## Overview
