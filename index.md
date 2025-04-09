@@ -44,20 +44,80 @@ REACT_APP_OKTA_REDIRECT_URI=http://localhost:3000/login/callback
 ### Session Validation on Component Mount
 
 The application checks for an existing session, retrieves tokens silently, and navigates accordingly.
+```tsx
+useEffect(() => {
+  oktaAuth.session.exists().then((response) => {
+    if (response) {
+      setSessionLoading(true);
+      oktaAuth.token
+        .getWithoutPrompt()
+        .then(async (response) => {
+          oktaAuth.tokenManager.setTokens(response.tokens);
+          await navigateWithAccessToken(response.tokens.accessToken?.accessToken, response.tokens.refreshToken?.refreshToken);
+        })
+        .finally(() => setSessionLoading(false));
+    }
+  });
+}, []);
+```
 
 ### Username/Password Authentication
 
 Authenticate users using their email and password.
 
+```tsx
+await oktaAuth.idx.startTransaction({ flow: 'authenticate' });
+const { status, tokens, messages } = await oktaAuth.idx.proceed({
+  username: formData.email,
+  password: formData.password,
+  authenticator: AuthenticatorKey.OKTA_PASSWORD,
+});
+if (status === IdxStatus.SUCCESS && tokens) {
+  oktaAuth.tokenManager.setTokens(tokens);
+  await navigateWithAccessToken(tokens.accessToken?.accessToken, tokens.refreshToken?.refreshToken);
+}
+```
+
 ### Magic Link (Email) Authentication
 
 This flow sends a verification email and polls for user completion.
+
+```tsx
+const idxTransaction = await oktaAuth.idx.authenticate({
+  username: email,
+  authenticator: AuthenticatorKey.OKTA_EMAIL,
+  methodType: 'email',
+});
+
+const pollUrl = nextStep?.authenticator?.poll?.href;
+while (!isLogin) {
+  const pollResponse = await fetch(pollUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ stateHandle }),
+  });
+  const pollData = await pollResponse.json();
+  if (pollData.successWithInteractionCode) {
+    const { interactionCode } = pollData.successWithInteractionCode.value.find(item => item.name === 'interaction_code');
+    const { clientId, codeVerifier, redirectUri, scopes } = await oktaAuth.idx.getTransactionMeta();
+    const tokenResponse = await oktaAuth.token.exchangeCodeForTokens({ interactionCode, clientId, codeVerifier, redirectUri, scopes });
+    oktaAuth.tokenManager.setTokens(tokenResponse.tokens);
+    await navigateWithAccessToken(tokenResponse.tokens.accessToken?.accessToken, tokenResponse.tokens.refreshToken?.refreshToken);
+    break;
+  }
+  await new Promise(resolve => setTimeout(resolve, 2000));
+}
+```
 
 ---
 
 ## 🧠 Token Management
 
 Tokens are securely managed using Okta’s `tokenManager`.
+
+```tsx
+oktaAuth.tokenManager.setTokens(tokens);
+```
 
 ---
 
@@ -94,6 +154,15 @@ This section covers **user registration** using Okta Identity Engine (IDX) in a 
 
 User registration is initiated using `oktaAuth.idx.register`. Upon success, tokens are stored, and the user is redirected.
 
+```tsx
+const { tokens, messages } = await oktaAuth.idx.register({
+  firstName,
+  lastName,
+  email,
+  passcode: password,
+});
+```
+
 ---
 
 ## 🧪 Error Handling
@@ -128,17 +197,49 @@ This section outlines the **password recovery flow** using Okta Identity Engine 
 
 Initiate password recovery via email and verify if OTP is required.
 
+```tsx
+await oktaAuth.idx.startTransaction({ flow: 'recoverPassword' });
+
+await oktaAuth.idx.proceed({
+  username:USER_NAME,
+  authenticators: [AuthenticatorKey.OKTA_EMAIL],
+});
+
+const { nextStep } = await oktaAuth.idx.proceed({ methodType: 'email' });
+
+if (nextStep?.inputs?.some((item) => item.name === 'verificationCode')) {
+  navigate('/otp');
+}
+```
+
 ---
 
 ## 🔢 OTP Verification
 
 Validate the OTP code and proceed. Ensure the OTP is a 6-digit code.
 
+
+```tsx
+const { nextStep, messages } = await oktaAuth.idx.proceed({ .verificationCode : OTP });
+
+if (nextStep?.inputs?.some((item) => item.name === 'password')) {
+  navigate('/new-password');
+}
+```
+
 ---
 
 ## 🔑 New Password Setup
 
 Allow users to set and confirm a new password. Password validation ensures a minimum of 8 characters.
+
+```tsx
+const { status, tokens } = await oktaAuth.idx.proceed({ password });
+if (status === IdxStatus.SUCCESS && tokens) {
+  oktaAuth.tokenManager.setTokens(tokens);
+  await afterOktaLogin(true, tokens.accessToken?.accessToken, tokens.refreshToken?.refreshToken);
+}
+```
 
 ---
 
