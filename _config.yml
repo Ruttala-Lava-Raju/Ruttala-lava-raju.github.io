@@ -11,8 +11,6 @@ color_scheme: dark # default is light; you can allow user toggle too
 # Enable support for toggling between light and dark themes
 just_the_docs:
     show_navigation: false
-    custom_css:
-        - /custom.css
     color_scheme_toggle: true
     color_schemes:
         light:
