@@ -1,3 +1,5 @@
 theme: jekyll-theme-minimal
 title: Okta IDX Authentication Guide
 description: This document provides comprehensive guidance for implementing Okta IDX in a React application, including login, registration, and password recovery flows.
+
+theme: minima
