@@ -1,8 +1,8 @@
----
+<!-- ---
 layout: wide
 title: Okta IDX Authentication Integration
 nav_order: 1
----
+--- -->
 
 # 📘 Okta IDX Login Integration
 
