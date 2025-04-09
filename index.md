@@ -265,30 +265,36 @@ Errors are parsed and displayed to users. Special handling is implemented for:
 
 #### Login Flow
 <p align="center">
-  <img src="assets/tbn-login-flow.png" alt="TBN Login Flow" class="img-styled" />
+  <img src="assets/tbn-login-flow.png" alt="TBN Login Flow" 
+       style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 #### Registration Flow
 <p align="center">
-  <img src="assets/tbn-registration-flow.png" alt="TBN Registration Flow" class="img-styled" />
+  <img src="assets/tbn-registration-flow.png" alt="TBN Registration Flow" 
+       style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 #### Password Reset Flow
 
 ##### Email Form
 <p align="center">
-  <img src="assets/tbn-password-reset-flow.png" alt="TBN Password Reset Flow" class="img-styled" />
+  <img src="assets/tbn-password-reset-flow.png" alt="TBN Password Reset Flow" 
+       style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 ##### OTP Form
 <p align="center">
-  <img src="assets/tbn-otp-flow.png" alt="TBN OTP Form" class="img-styled" />
+  <img src="assets/tbn-otp-flow.png" alt="TBN OTP Form" 
+       style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 ##### New Password Form
 <p align="center">
-  <img src="assets/tbn-new-password-flow.png" alt="TBN New Password Form" class="img-styled" />
+  <img src="assets/tbn-new-password-flow.png" alt="TBN New Password Form" 
+       style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
+
 
 ---
 
