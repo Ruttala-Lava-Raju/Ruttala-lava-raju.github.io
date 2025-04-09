@@ -1,15 +1,15 @@
 title: Okta IDX Authentication Guide
 description: This document provides comprehensive guidance for implementing Okta IDX in a React application, including login, registration, and password recovery flows.
 
-# remote_theme: just-the-docs/just-the-docs
-# color_scheme: dark
-# just_the_docs:
-#   color_scheme_toggle: true
-#   color_schemes:
-#     light:
-#       name: Light
-#     dark:
-#       name: Dark
+remote_theme: just-the-docs/just-the-docs
+color_scheme: dark
+just_the_docs:
+  color_scheme_toggle: true
+  color_schemes:
+    light:
+      name: Light
+    dark:
+      name: Dark
 
-# search_enabled: true
-# highlighter: rouge
+search_enabled: true
+highlighter: rouge
