@@ -1,1 +1,13 @@
+/* Hide the sidebar and adjust layout */
+.side-bar {
+  display: none !important;
+}
 
+.main {
+  margin-left: 0 !important;
+  padding-left: 2rem;
+}
+
+.site-footer {
+  padding-left: 2rem;
+}

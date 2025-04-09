@@ -10,13 +10,15 @@ color_scheme: dark # default is light; you can allow user toggle too
 
 # Enable support for toggling between light and dark themes
 just_the_docs:
-    show_navigation: false
-    color_scheme_toggle: true
-    color_schemes:
-        light:
-          name: Light
-        dark:
-          name: Dark
+  show_navigation: false
+  custom_css:
+    - '/assets/custom.css'
+  color_scheme_toggle: true
+  color_schemes:
+    light:
+      name: Light
+    dark:
+      name: Dark
 
 # Full-width layout
 # This will remove the sidebar and let content span the full page width
