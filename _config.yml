@@ -12,7 +12,7 @@ color_scheme: dark # default is light; you can allow user toggle too
 just_the_docs:
   show_navigation: false
   custom_css:
-    - '/assets/custom.css'
+    - './assets/custom.css'
   color_scheme_toggle: true
   color_schemes:
     light:
