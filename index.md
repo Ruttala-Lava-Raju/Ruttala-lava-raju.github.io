@@ -264,18 +264,32 @@ Errors are parsed and displayed to users. Special handling is implemented for:
 ### TBN Tenant
 
 #### Login Flow
-![TBN Login Flow](assets/tbn-login-flow.png)
+<p align="center">
+  <img src="assets/tbn-login-flow.png" alt="TBN Login Flow" class="img-styled" />
+</p>
 
 #### Registration Flow
-![TBN Registration Flow](assets/tbn-registration-flow.png)
+<p align="center">
+  <img src="assets/tbn-registration-flow.png" alt="TBN Registration Flow" class="img-styled" />
+</p>
 
 #### Password Reset Flow
+
 ##### Email Form
-![TBN Password Reset Flow](assets/tbn-password-reset-flow.png)
+<p align="center">
+  <img src="assets/tbn-password-reset-flow.png" alt="TBN Password Reset Flow" class="img-styled" />
+</p>
+
 ##### OTP Form
-![TBN OTP form](assets/tbn-otp-flow.png)
+<p align="center">
+  <img src="assets/tbn-otp-flow.png" alt="TBN OTP Form" class="img-styled" />
+</p>
+
 ##### New Password Form
-![TBN New Password form](assets/tbn-new-password-flow.png)
+<p align="center">
+  <img src="assets/tbn-new-password-flow.png" alt="TBN New Password Form" class="img-styled" />
+</p>
+
 ---
 
 <!-- ### PBR Tenant
