@@ -8,21 +8,27 @@ nav_order: 1
 
 ### Install Required Packages
 
-Run the following command to install the necessary dependencies:
+<details>
+<summary>Run the following command to install the necessary dependencies:</summary>
 
 ```bash
 npm install @okta/okta-auth-js @okta/okta-react
 ```
 
+</details>
+
 ### Configure Environment Variables
 
-Set up the following environment variables in your `.env` file:
+<details>
+<summary>Set up the following environment variables in your `.env` file:</summary>
 
 ```env
 REACT_APP_OKTA_CLIENT_ID=your-client-id
 REACT_APP_OKTA_ISSUER=https://your-okta-domain/oauth2/default
 REACT_APP_OKTA_REDIRECT_URI=http://localhost:3000/login/callback
 ```
+
+</details>
 
 ---
 
@@ -41,7 +47,8 @@ This section covers user authentication using Okta Identity Engine (IDX) in a Re
 
 ### Session Validation on Component Mount
 
-The application checks for an existing session, retrieves tokens silently, and navigates accordingly.
+<details>
+<summary>The application checks for an existing session, retrieves tokens silently, and navigates accordingly:</summary>
 
 ```tsx
 useEffect(() => {
@@ -60,9 +67,12 @@ useEffect(() => {
 }, []);
 ```
 
+</details>
+
 ### Username/Password Authentication
 
-Authenticate users using their email and password.
+<details>
+<summary>Authenticate users using their email and password:</summary>
 
 ```tsx
 await oktaAuth.idx.startTransaction({ flow: 'authenticate' });
@@ -77,9 +87,12 @@ if (status === IdxStatus.SUCCESS && tokens) {
 }
 ```
 
+</details>
+
 ### Magic Link (Email) Authentication
 
-This flow sends a verification email and polls for user completion.
+<details>
+<summary>This flow sends a verification email and polls for user completion:</summary>
 
 ```tsx
 const idxTransaction = await oktaAuth.idx.authenticate({
@@ -108,15 +121,20 @@ while (!isLogin) {
 }
 ```
 
+</details>
+
 ---
 
 ## 🧠 Token Management
 
-Tokens are securely managed using Okta’s `tokenManager`.
+<details>
+<summary>Tokens are securely managed using Okta’s `tokenManager`:</summary>
 
 ```tsx
 oktaAuth.tokenManager.setTokens(tokens);
 ```
+
+</details>
 
 ---
 
@@ -151,7 +169,8 @@ This section covers **user registration** using Okta Identity Engine (IDX) in a 
 
 ### Registering a New User
 
-User registration is initiated using `oktaAuth.idx.register`. Upon success, tokens are stored, and the user is redirected.
+<details>
+<summary>User registration is initiated using `oktaAuth.idx.register`. Upon success, tokens are stored, and the user is redirected:</summary>
 
 ```tsx
 const { tokens, messages } = await oktaAuth.idx.register({
@@ -161,6 +180,8 @@ const { tokens, messages } = await oktaAuth.idx.register({
   passcode: password,
 });
 ```
+
+</details>
 
 ---
 
@@ -194,7 +215,8 @@ This section outlines the **password recovery flow** using Okta Identity Engine 
 
 ## 🔐 Reset Password
 
-Initiate password recovery via email and verify if OTP is required.
+<details>
+<summary>Initiate password recovery via email and verify if OTP is required:</summary>
 
 ```tsx
 await oktaAuth.idx.startTransaction({ flow: 'recoverPassword' });
@@ -211,25 +233,31 @@ if (nextStep?.inputs?.some((item) => item.name === 'verificationCode')) {
 }
 ```
 
+</details>
+
 ---
 
 ## 🔢 OTP Verification
 
-Validate the OTP code and proceed. Ensure the OTP is a 6-digit code.
+<details>
+<summary>Validate the OTP code and proceed. Ensure the OTP is a 6-digit code:</summary>
 
 ```tsx
-const { nextStep, messages } = await oktaAuth.idx.proceed({ .verificationCode : OTP });
+const { nextStep, messages } = await oktaAuth.idx.proceed({ verificationCode : OTP });
 
 if (nextStep?.inputs?.some((item) => item.name === 'password')) {
   navigate('/new-password');
 }
 ```
 
+</details>
+
 ---
 
 ## 🔑 New Password Setup
 
-Allow users to set and confirm a new password. Password validation ensures a minimum of 8 characters.
+<details>
+<summary>Allow users to set and confirm a new password. Password validation ensures a minimum of 8 characters:</summary>
 
 ```tsx
 const { status, tokens } = await oktaAuth.idx.proceed({ password });
@@ -238,6 +266,8 @@ if (status === IdxStatus.SUCCESS && tokens) {
   await afterOktaLogin(true, tokens.accessToken?.accessToken, tokens.refreshToken?.refreshToken);
 }
 ```
+
+</details>
 
 ---
 
@@ -299,27 +329,3 @@ Errors are parsed and displayed to users. Special handling is implemented for:
 </p>
 
 ---
-
-<!-- ### PBR Tenant
-
-#### Login Flow
-![PBR Login Flow](assets/pbr-login-flow.png)
-
-#### Registration Flow
-![PBR Registration Flow](assets/pbr-registration-flow.png)
-
-#### Password Reset Flow
-![PBR Password Reset Flow](assets/pbr-password-reset-flow.png)
-
----
-
-### MSM Tenant
-
-#### Login Flow
-![MSM Login Flow](assets/msm-login-flow.png)
-
-#### Registration Flow
-![MSM Registration Flow](assets/msm-registration-flow.png)
-
-#### Password Reset Flow
-![MSM Password Reset Flow](assets/msm-password-reset-flow.png) -->
