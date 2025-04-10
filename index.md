@@ -24,6 +24,39 @@ REACT_APP_OKTA_ISSUER=https://your-okta-domain/oauth2/default
 REACT_APP_OKTA_REDIRECT_URI=http://localhost:3000/login/callback
 ```
 
+### Initialize Okta
+
+Set up an instance of the Okta Auth SDK in your application. This instance will be used for authentication and token management.
+
+```tsx
+import { OktaAuth } from '@okta/okta-auth-js';
+
+const oktaAuth = new OktaAuth({
+  clientId: process.env.REACT_APP_OKTA_CLIENT_ID,
+  issuer: process.env.REACT_APP_OKTA_ISSUER,
+  redirectUri: process.env.REACT_APP_OKTA_REDIRECT_URI,
+  scopes: ['openid', 'profile', 'email'],
+});
+```
+
+### Wrap Application with Okta Security Component
+
+To secure your application, wrap the root component with the `Security` component from `@okta/okta-react`. This ensures that all routes are protected and authentication is enforced.
+
+```tsx
+import { Security } from '@okta/okta-react';
+
+const App = () => {
+  return (
+    <Security oktaAuth={oktaAuth}>
+      <YourRoutes />
+    </Security>
+  );
+};
+```
+
+Replace `YourRoutes` with your application's routing component or structure.
+
 ---
 
 # 📘 Okta IDX Login Integration
