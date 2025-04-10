@@ -4,19 +4,6 @@ title: Okta IDX Authentication Integration
 nav_order: 1
 --- -->
 
-# 📘 Okta IDX Login Integration
-
-## Overview
-
-This section covers user authentication using Okta Identity Engine (IDX) in a React application. It includes:
-
-- **Username/password authentication**
-- **Magic Link (email-based) login**
-- **Session rehydration with token renewal**
-- **Token management and post-authentication navigation**
-
----
-
 ## 🔧 Environment Setup
 
 ### Install Required Packages
@@ -39,11 +26,23 @@ REACT_APP_OKTA_REDIRECT_URI=http://localhost:3000/login/callback
 
 ---
 
+# 📘 Okta IDX Login Integration
+
+## Overview
+
+This section covers user authentication using Okta Identity Engine (IDX) in a React application. It includes:
+
+- **Username/password authentication**
+- **Magic Link (email-based) login**
+- **Session rehydration with token renewal**
+- **Token management and post-authentication navigation**
+
 ## 🚀 Authentication Flow
 
 ### Session Validation on Component Mount
 
 The application checks for an existing session, retrieves tokens silently, and navigates accordingly.
+
 ```tsx
 useEffect(() => {
   oktaAuth.session.exists().then((response) => {
@@ -218,7 +217,6 @@ if (nextStep?.inputs?.some((item) => item.name === 'verificationCode')) {
 
 Validate the OTP code and proceed. Ensure the OTP is a 6-digit code.
 
-
 ```tsx
 const { nextStep, messages } = await oktaAuth.idx.proceed({ .verificationCode : OTP });
 
@@ -264,37 +262,41 @@ Errors are parsed and displayed to users. Special handling is implemented for:
 ### TBN Tenant
 
 #### Login Flow
+
 <p align="center">
-  <img src="assets/tbn-login-flow.png" alt="TBN Login Flow" 
+  <img src="assets/tbn-login-flow.png" alt="TBN Login Flow"
        style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 #### Registration Flow
+
 <p align="center">
-  <img src="assets/tbn-registration-flow.png" alt="TBN Registration Flow" 
+  <img src="assets/tbn-registration-flow.png" alt="TBN Registration Flow"
        style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 #### Password Reset Flow
 
 ##### Email Form
+
 <p align="center">
-  <img src="assets/tbn-password-reset-flow.png" alt="TBN Password Reset Flow" 
+  <img src="assets/tbn-password-reset-flow.png" alt="TBN Password Reset Flow"
        style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 ##### OTP Form
+
 <p align="center">
-  <img src="assets/tbn-otp-flow.png" alt="TBN OTP Form" 
+  <img src="assets/tbn-otp-flow.png" alt="TBN OTP Form"
        style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
 
 ##### New Password Form
+
 <p align="center">
-  <img src="assets/tbn-new-password-flow.png" alt="TBN New Password Form" 
+  <img src="assets/tbn-new-password-flow.png" alt="TBN New Password Form"
        style="border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); max-width:90%; height:auto; display:block; margin:1.5rem auto;" />
 </p>
-
 
 ---
 
