@@ -292,7 +292,7 @@ Errors are parsed and displayed to users. Special handling is implemented for:
 
 ## 🖼️ Flow Screens
 
-### [TBN Tenant]("https://www.tbnplus.com/)
+### [TBN Tenant](https://www.tbnplus.com/)
 
 #### Login Flow
 
